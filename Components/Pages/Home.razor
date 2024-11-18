@@ -1,0 +1,44 @@
+﻿@page "/"
+@using DispatchManager.Services
+@using System.Data
+@inject DatabaseService DatabaseService
+
+<PageTitle>ROLE SELECT</PageTitle>
+
+<h1>ROLE SELECT</h1>
+
+Please Select Your Role! Hot ref
+
+<div class="button-container" btn>
+    <button class="driver-button">Change</button>
+    <button class="mechanic-button">Mechanic</button>
+
+</div>
+
+<h3>Drivers</h3>
+<button>Test Retrieval</button>
+@if (drivers != null)
+{
+    <ul>
+        @foreach (DataRow driver in drivers.Rows)
+        {
+            <li>@driver["drivername"]</li>
+        }
+    </ul>
+}
+else
+{
+    <p>Loading drivers...</p>
+}
+
+
+@code {
+    private DataTable drivers;
+
+    protected override async Task OnInitializedAsync()
+    {
+        string query = "SELECT * FROM driver";
+        drivers = DatabaseService.ExecuteQuery(query);
+    }
+    
+}
