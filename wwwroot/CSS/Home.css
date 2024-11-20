@@ -1,5 +1,32 @@
-﻿body {
+﻿/* Center the buttons */
+.button-container {
+    width: 400px;
+    height: 80px;
+    gap: 20px; /* Adds space between the buttons */
+    margin-top: 30px;
 }
-.button-container{
-    padding-left: 300px;
+
+.driver-button {
+    width: 200px;
+    height: 80px;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+/* Style for the buttons */
+.mechanic-button {
+    font-size: 20px;
+    padding: 20px 40px;
+    background-color: #4caf50; /* Green button */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 200px;
+    height: 80px;
+    transition: background-color 0.3s ease;
+}
+
+.role-button:hover {
+    background-color: #45a049; /* Darker green when hovered */
 }

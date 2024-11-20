@@ -2,15 +2,17 @@
 @using DispatchManager.Services
 @using System.Data
 @inject DatabaseService DatabaseService
+@inject NavigationManager Navigation
+
 
 <PageTitle>ROLE SELECT</PageTitle>
 
 <h1>ROLE SELECT</h1>
 
-Please Select Your Role! Hot ref
+Please Select Your Role!
 
 <div class="button-container" btn>
-    <button class="driver-button">Change</button>
+    <button class="driver-button" @onclick="NavigateToDriverDashboard">Driver</button>
     <button class="mechanic-button">Mechanic</button>
 
 </div>
@@ -40,5 +42,10 @@ else
         string query = "SELECT * FROM driver";
         drivers = DatabaseService.ExecuteQuery(query);
     }
-    
+
+    private void NavigateToDriverDashboard()
+    {
+        Navigation.NavigateTo("/driver-login");
+    }
+
 }
