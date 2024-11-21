@@ -1,5 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System.Data;
+using MySql.Data.MySqlClient;
+
 
 namespace DispatchManager.Services
 {
