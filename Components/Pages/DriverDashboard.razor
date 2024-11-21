@@ -1,14 +1,39 @@
 ﻿@page "/driver-dashboard"
+@rendermode InteractiveServer
 <PageTitle>Driver Dashboard</PageTitle>
 
 
 <div class="DD-Header">
 	<h3>Driver Dashboard</h3>
-	<button class="DD-back-button">Back</button>
+	
+</div>
+<button class="DD-back-button" @onclick="BackToDriverLogin">Back</button>
 
+<div class="DD-Welcome">
+	<h2>Welcome @driverName</h2>
 </div>
 
-
 @code {
+	private string driverName;
+	private string driverID;
 
+	protected override async Task OnInitializedAsync()
+	{
+		var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
+		var queryParameters = System.Web.HttpUtility.ParseQueryString(uri.Query);
+
+		// Extract the driverID from the query parameters
+		driverID = queryParameters["driverID"];
+
+		string query = "SELECT drivername FROM driver WHERE driverid = @driverID";
+		DataTable result = await DatabaseService.ExecuteQueryAsync(query, new MySqlParameter("@driverID", driverID));
+
+		//check if valid driver ID
+		driverName = result.Rows[0]["drivername"].ToString(); //probably this
+	}
+	private void BackToDriverLogin()
+	{
+		driverName = "trigger";
+		Navigation.NavigateTo("/driver-login");
+	} 
 }
