@@ -1,0 +1,20 @@
+﻿@namespace DispatchManager.Components
+<button class="Delete-Driver-Button" @onclick="Delete"> DELETE </button>
+
+@code {
+	[Parameter]
+	public string driverID { get; set; }
+
+	private async Task Delete()
+	{
+		string query = "DELETE FROM DRIVER WHERE driverID = @driverID";
+		var parameters = new[]
+		{
+			new MySqlParameter("@driverID", driverID)
+		};
+
+		await DatabaseService.ExecuteNonQueryAsync(query, parameters);
+
+		Navigation.NavigateTo("/driver-login");
+	}
+}

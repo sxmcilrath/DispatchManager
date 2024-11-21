@@ -2,9 +2,10 @@
 @rendermode InteractiveServer
 <PageTitle>Driver Dashboard</PageTitle>
 
-
+<!--Header-->
 <div class="DD-Header">
 	<h3>Driver Dashboard</h3>
+	<DeleteDriver driverID="@driverID"/>
 	
 </div>
 <button class="DD-back-button" @onclick="BackToDriverLogin">Back</button>
@@ -15,6 +16,7 @@
 	<button @onclick="() => editNamePopup = !editNamePopup"> Edit Name</button>
 </div>
 
+<!--Function Buttons-->
 <div class="DD-Functions">
 	<button class="btn btn-primary mt-2">Reccomend Truck</button>
 </div>
