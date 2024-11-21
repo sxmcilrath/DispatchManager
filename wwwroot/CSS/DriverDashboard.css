@@ -3,3 +3,9 @@
     flex-direction: row; /* Align items in a row */
     justify-content: space-around; /* Distribute items evenly */
 }
+
+.DD-EditName-Container{
+    background-color: lightblue;
+    height: 100px;
+    width: 100px;
+}
