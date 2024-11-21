@@ -46,5 +46,14 @@ namespace DispatchManager.Services
             connection.Open();
             return command.ExecuteNonQuery();
         }
-    }
+		public async Task<int> ExecuteNonQueryAsync(string query, params MySqlParameter[] parameters)
+		{
+			using var connection = new MySqlConnection(_connectionString);
+			using var command = new MySqlCommand(query, connection);
+			command.Parameters.AddRange(parameters);
+
+			await connection.OpenAsync();
+			return await command.ExecuteNonQueryAsync();
+		}
+	}
 }

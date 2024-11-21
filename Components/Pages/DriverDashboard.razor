@@ -19,19 +19,20 @@
 	<button class="btn btn-primary mt-2">Reccomend Truck</button>
 </div>
 
+<!--Edit Name Popup-->
 @if (editNamePopup)
 {
-	<div class="DD-EditName-Container">
-
-	</div>
+	<UpdateDriverName driverID="@driverID" driverName="@driverName" onEditComplete="HandleEditComplete" />
 }
 @code {
 
 	private string driverName;
+	private string newName;
 	private string driverID;
 
-	private Boolean editNamePopup = false;
+	private bool editNamePopup = false;
 
+	//initialize dashboard
 	protected override async Task OnInitializedAsync()
 	{
 		//parse the uri
@@ -50,7 +51,17 @@
 	}
 	private void BackToDriverLogin()
 	{
-		driverName = "trigger";
 		Navigation.NavigateTo("/driver-login");
 	} 
+
+	private async Task HandleEditComplete(bool completed)
+	{
+		if (completed)
+		{
+			await OnInitializedAsync();
+
+			editNamePopup = false;
+		}
+	}
+
 }

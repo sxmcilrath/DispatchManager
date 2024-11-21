@@ -1,0 +1,30 @@
+﻿@namespace DispatchManager.Components
+<div>
+	<input form="text" id="driverId" @bind="newName" class="form-control" placeholder="@driverName" />
+	<button @onclick="CompleteEdit"> Confirm </button>
+</div>
+
+@code {
+	[Parameter]
+	public string driverID { get; set; }
+	[Parameter]
+	public string driverName { get; set; }
+	[Parameter]
+	public EventCallback<bool> onEditComplete { get; set; }
+
+	private string newName;
+
+	private async Task CompleteEdit()
+	{
+		string query = "UPDATE driver SET drivername = @newName WHERE driverid = @driverID";
+		var parameters = new[]
+		{
+				new MySqlParameter("@newName", newName),
+				new MySqlParameter("@driverID", driverID)
+		};
+
+		await DatabaseService.ExecuteNonQueryAsync(query, parameters);
+
+		await onEditComplete.InvokeAsync(true);
+	}
+}
