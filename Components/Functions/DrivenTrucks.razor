@@ -1,0 +1,44 @@
+﻿@namespace DispatchManager.Components
+<p>Driven Trucks</p>
+@if (drivenTrucks is not null && drivenTrucks.Count > 0)
+{
+	<ul>
+		@foreach (var truckId in drivenTrucks)
+		{
+			<li>@truckId</li>
+		}
+	</ul>
+}
+else if (drivenTrucks is not null && drivenTrucks.Count == 0)
+{
+	<p>No trucks driven by this driver.</p>
+}
+else
+{
+	<p>Loading trucks...</p>
+}
+@code {
+	[Parameter]
+	public string driverID { get; set; }
+
+	private List<string> drivenTrucks;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await GetdrivenTrucks();
+	}
+
+	private async Task GetdrivenTrucks()
+	{
+		drivenTrucks = new List<string>();
+
+		string query = "SELECT truckid FROM truck WHERE drivenbyid = @driverid";
+		DataTable result = await DatabaseService.ExecuteQueryAsync(query, new MySqlParameter("@driverID", driverID));
+
+		foreach (DataRow row in result.Rows)
+		{
+			drivenTrucks.Add(row["truckid"].ToString());
+		}
+	}
+
+}
