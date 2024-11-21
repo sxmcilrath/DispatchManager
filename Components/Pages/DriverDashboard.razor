@@ -10,7 +10,7 @@
 </div>
 <button class="DD-back-button" @onclick="BackToDriverLogin">Back</button>
 
-
+<!--Sub header-->
 <div class="DD-Welcome">
 	<h2>Welcome @driverName</h2>
 	<button @onclick="() => editNamePopup = !editNamePopup"> Edit Name</button>
@@ -19,6 +19,7 @@
 <!--Function Buttons-->
 <div class="DD-Functions">
 	<button class="btn btn-primary mt-2">Reccomend Truck</button>
+	<button class="btn btn-primary mt-2" @onclick="() => driverReportPopup = !driverReportPopup">Generate Report</button>
 </div>
 
 <!--Edit Name Popup-->
@@ -26,6 +27,23 @@
 {
 	<UpdateDriverName driverID="@driverID" driverName="@driverName" onEditComplete="HandleEditComplete" />
 }
+
+<!--Driver Report-->
+@if(driverReportPopup){
+	<div class="DD-Report-Container">
+		<h2 class="DD-Report-Title">@driverID</h2>
+		<h3 class="DD-Report-Subheading">Weekly Report</h3>
+
+		<div class="DD-Report-Info-Container">
+			<div class="DD-Report-Info-Driver">
+				<p>Driver Name: @driverName</p>
+				<GetDriversLicense driverID="@driverID"/>
+			</div>
+		</div>
+	</div>
+}
+
+
 @code {
 
 	private string driverName;
@@ -33,6 +51,7 @@
 	private string driverID;
 
 	private bool editNamePopup = false;
+	private bool driverReportPopup = false;
 
 	//initialize dashboard
 	protected override async Task OnInitializedAsync()

@@ -1,0 +1,23 @@
+﻿@namespace DispatchManager.Components
+
+<p>Drivers License: @driversLicense</p>
+
+@code {
+
+	[Parameter]
+	public string driverID { get; set; }
+
+	private string driversLicense;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await GetLicense();
+	}
+
+	private async Task GetLicense(){
+		string query = "SELECT driverlicenseno FROM driver WHERE driverid = @driverID";
+		DataTable result = await DatabaseService.ExecuteQueryAsync(query, new MySqlParameter("@driverID", driverID));
+
+		driversLicense = result.Rows[0]["driverlicenseno"].ToString();
+	}
+}
