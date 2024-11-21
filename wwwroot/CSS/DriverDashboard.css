@@ -1,0 +1,5 @@
+﻿.DD-Header {
+    display: flex;
+    flex-direction: row; /* Align items in a row */
+    justify-content: space-around; /* Distribute items evenly */
+}

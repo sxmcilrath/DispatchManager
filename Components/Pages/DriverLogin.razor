@@ -35,7 +35,7 @@
         }
 
         string query = "SELECT drivername FROM driver WHERE driverid = @driverID"; 
-        DataTable result = await DatabaseService.ExecuteQuery(query, new MySqlParameter("@driverID", driverID));
+        DataTable result = await DatabaseService.ExecuteQueryAsync(query, new MySqlParameter("@driverID", driverID));
         
         //check if valid driver ID
         if(result.Rows.Count > 0){
