@@ -53,15 +53,11 @@ else
                 d.destname,
                 dt.traveltime,
                 dt.traveldate
-            FROM
-                drivesto dt
-            JOIN
-                truck t ON t.truckid = dt.truckid
-            JOIN
-                destination d ON d.destcoordinates = dt.destcoordinates
-            WHERE
-                t.ownerid = @driverID
-                AND dt.traveldate >= CURDATE() - INTERVAL 7 DAY";
+            FROM drivesto dt
+            JOIN truck t ON t.truckid = dt.truckid
+            JOIN destination d ON d.destcoordinates = dt.destcoordinates
+            WHERE t.ownerid = @driverID
+            AND dt.traveldate >= CURDATE() - INTERVAL 7 DAY";
 
         trips = await DatabaseService.ExecuteQueryAsync(query, new MySqlParameter("@driverID", driverID));
     }

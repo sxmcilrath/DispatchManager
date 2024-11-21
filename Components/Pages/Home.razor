@@ -15,7 +15,7 @@ Please Select Your Role!
 
     <button class="driver-button" @onclick="NavigateToDriverLogin">Driver</button>
 
-    <button class="mechanic-button" @onclick="inc">Mechanic</button>
+    <button class="mechanic-button" @onclick="NavigateToMechanicDashboard">Mechanic</button>
 
 
 
@@ -47,7 +47,12 @@ Please Select Your Role!
             Navigation.NavigateTo("/driver-login");
         }
     }
-    /*
+
+    private void NavigateToMechanicDashboard()
+    {
+        Navigation.NavigateTo("/mechanic-dashboard");
+    }
+        /*
      * @if (drivers != null)
         {
         <ul>

@@ -1,0 +1,33 @@
+﻿@page "/mechanic-dashboard"
+<h3>Mechanic Dashboard</h3>
+
+<!--Mechanic List-->
+<div class="MD-Mechanic-List-Container">
+	@foreach(DataRow row in mechanics.Rows)
+	{
+		<div class="MD-Mechanic-List-Info-Container">
+			<p>ID : @row["mechid"]</p>
+			<p>Name: @row["mechfname"] @row["mechlname"]</p>
+			@if(row["yearsofexperience"] != null)
+			{
+				<p>experience: @row["yearsofexperience"] </p>
+			}
+		</div>
+		<div class="MD-Mechanic-List-Button-Container"> 
+
+		</div>
+	}
+</div>
+
+@code {
+
+	private DataTable mechanics;
+	protected override async Task OnInitializedAsync()
+	{
+		string query = "SELECT * FROM mechanic";
+
+		mechanics =  DatabaseService.ExecuteQuery(query); //store mechs 
+
+	}
+
+}

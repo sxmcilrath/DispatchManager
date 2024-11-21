@@ -1,0 +1,30 @@
+﻿@namespace DispatchManager.Components
+
+<h4>HoursDriven</h4>
+<p>@totalHours</p>
+
+@code {
+	[Parameter]
+	public string driverID { get; set; }
+
+	private double totalHours = 0;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await GetHours();
+	}
+
+	private async Task GetHours()
+	{
+		string query = @"
+            SELECT SUM(traveltime) AS TotalHours
+            FROM drivesto dt
+            JOIN truck t ON t.truckid = dt.truckid
+            WHERE t.ownerid = @driverID
+            AND dt.traveldate >= CURDATE() - INTERVAL 7 DAY";
+
+		DataTable results = await DatabaseService.ExecuteQueryAsync(query, new MySqlParameter("@driverID", driverID));
+
+		totalHours = Convert.ToDouble(results.Rows[0]["TotalHours"]);
+	}
+}
