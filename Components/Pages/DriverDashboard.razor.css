@@ -1,0 +1,243 @@
+﻿/* General styling for the entire page */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #f9f9f9, #eaeaea); /* Subtle gradient background */
+    color: #333;
+    box-sizing: border-box;
+}
+
+.DD-Title{
+    align-items:center;
+    justify-content: center;
+    display:flex;
+    font-weight: 1000;
+}
+/* Header styling */
+.DD-Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #007bff;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+    .DD-Header h3 {
+        margin: 0;
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+/* Back button styling */
+.DD-back-button {
+    margin: 1rem 2rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: #f44336;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+    .DD-back-button:hover {
+        background-color: #d32f2f;
+        transform: scale(1.05);
+    }
+
+/* Welcome section */
+.DD-Welcome {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+    .DD-Welcome h2 {
+        font-size: 2rem;
+        color: #333;
+        margin-bottom: 1rem;
+    }
+
+    .DD-Welcome button {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+        .DD-Welcome button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+/* Functions section */
+.DD-Functions {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    margin: 2rem 0;
+    height: 300px;
+    background-color: lightblue;
+    border-radius: 10px;
+    gap: 20px;
+}
+
+.DD-Generate-Report-Button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.25rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    height: 50%;
+}
+
+    .DD-Generate-Report-Button:hover {
+        background-color: #218838;
+        transform: scale(1.05);
+    }
+.DD-EditName-Button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.25rem;
+    border: none;
+    border-radius: 8px;
+    background-color: orange;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    height: 50%;
+}
+
+    .DD-EditName-Button:hover {
+        background-color: darkgoldenrod;
+        transform: scale(1.05);
+    }
+
+
+/* Report container */
+.DD-Report-Container {
+    background-color: white;
+    padding: 2rem;
+    margin: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    margin: 2rem auto;
+}
+
+.DD-Report-Title {
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.DD-Report-Subheading {
+    font-size: 1.25rem;
+    color: #555;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.DD-Report-Info-Container {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.DD-Report-Info-Driver, .DD-Report-Info-Travel {
+    flex: 1;
+    min-width: 300px;
+}
+
+    .DD-Report-Info-Driver p, .DD-Report-Info-Travel p {
+        font-size: 1rem;
+        margin: 0.5rem 0;
+    }
+
+/* Popup overlay and container */
+.DD-Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.DD-Popup {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 100%;
+    z-index: 1000;
+    position: relative;
+    text-align: center;
+}
+
+/* Close button */
+.DD-Popup-Close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.2s ease-in-out;
+}
+
+    .DD-Popup-Close:hover {
+        color: red;
+    }
+
+/* Button styling for popup */
+.DD-Popup button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .DD-Popup button:hover {
+        background-color: #0056b3;
+    }
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .DD-Welcome h2 {
+        font-size: 1.5rem;
+    }
+
+    .DD-Generate-Report-Button {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .DD-Report-Info-Container {
+        flex-direction: column;
+    }
+}

@@ -1,60 +1,63 @@
 ﻿@page "/mechanic-dashboard"
 @rendermode InteractiveServer
 
-<h3>Mechanic Dashboard</h3>
+<div class="MD-Header">
+    <h3 class="MD-Title">Mechanic Dashboard</h3>
+    <div class="MD-Header-Buttons">
+        <button class="MD-Hire-Button" @onclick="() => hireMechPopup = !hireMechPopup">Hire Mechanic</button>
+        <button class="MD-Generate-Report-Button" @onclick="() => reportPopup = !reportPopup">Generate Report</button>
+    </div>
+</div>
 
-<!--Hire Mechanic-->
-<button @onclick="() => hireMechPopup = !hireMechPopup">Hire Mechanic</button>
 @if (hireMechPopup)
 {
-	<p>rets true</p>
-	<HireMechanic/>
+    <div class="MD-Overlay" @onclick="() => hireMechPopup = false">
+        <div class="MD-Popup" @onclick:stopPropagation>
+            <p>New Hire Info</p>
+            <HireMechanic />
+        </div>
+    </div>
 }
 
-<!--Generate Report-->
-<button @onclick="() => reportPopup = !reportPopup">Generate Report</button>
 @if (reportPopup)
 {
-	<div class="MD-Report-Container">
-		<Repairs></Repairs>
-	</div>
+    <div class="MD-Overlay" @onclick="() => reportPopup = false">
+        <div class="MD-Popup" @onclick:stopPropagation>
+            <Repairs/>
+        </div>
+    </div>
 }
-<!--New Repair -->
-<button @onclick="() => newRepairPopup = !newRepairPopup"></button>
-@if (newRepairPopup)
-{
-	
-}
-<!--Mechanic List-->
+
+<!-- Mechanic List -->
 <div class="MD-Mechanic-List-Container">
-	@foreach(DataRow row in mechanics.Rows)
-	{
-		<div class="MD-Mechanic-List-Info-Container">
-			<p>ID : @row["mechid"]</p>
-			<p>Name: @row["mechfname"] @row["mechlname"]</p>
-			@if(row["yearsofexperience"] != null)
-			{
-				<p>experience: @row["yearsofexperience"] </p>
-			}
-		</div>
-		<div class="MD-Mechanic-List-Button-Container"> 
-			<DeleteMechanic mechid="@row["mechid"].ToString()"/>
-		</div>
-	}
+    @foreach (DataRow row in mechanics.Rows)
+    {
+        <div class="MD-Mechanic-Card">
+            <div class="MD-Mechanic-Info">
+                <p><strong>ID:</strong> @row["mechid"]</p>
+                <p><strong>Name:</strong> @row["mechfname"] @row["mechlname"]</p>
+                @if (row["yearsofexperience"] != null)
+                {
+                    <p><strong>Experience:</strong> @row["yearsofexperience"] years</p>
+                }
+            </div>
+            <div class="MD-Mechanic-Actions">
+                <DeleteMechanic mechid="@row["mechid"].ToString()" />
+            </div>
+        </div>
+    }
 </div>
 
 @code {
-	private bool hireMechPopup = false;
-	private bool reportPopup = false;
-	private bool newRepairPopup = false;
+    private bool hireMechPopup = false;
+    private bool reportPopup = false;
 
-	private DataTable mechanics;
-	protected override async Task OnInitializedAsync()
-	{
-		string query = "SELECT * FROM mechanic";
+    private DataTable mechanics;
 
-		mechanics =  DatabaseService.ExecuteQuery(query); //store mechs 
+    protected override async Task OnInitializedAsync()
+    {
+        string query = "SELECT * FROM mechanic";
 
-	}
-
+        mechanics = DatabaseService.ExecuteQuery(query); // store mechanics
+    }
 }

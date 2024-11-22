@@ -3,92 +3,95 @@
 <PageTitle>Driver Dashboard</PageTitle>
 
 <!--Header-->
+<h1 class="DD-Title">DRIVER DASHBOARD</h1>
 <div class="DD-Header">
-	<h3>Driver Dashboard</h3>
-	<DeleteDriver driverID="@driverID"/>
+    <h3>Welcome @driverName !</h3>
+    <button class="DD-back-button" @onclick="BackToDriverLogin">Back</button>
 	
-</div>
-<button class="DD-back-button" @onclick="BackToDriverLogin">Back</button>
-
-<!--Sub header-->
-<div class="DD-Welcome">
-	<h2>Welcome @driverName</h2>
-	<button @onclick="() => editNamePopup = !editNamePopup"> Edit Name</button>
 </div>
 
 <!--Function Buttons-->
 <div class="DD-Functions">
-	<button class="btn btn-primary mt-2">Reccomend Truck</button>
-	<button class="btn btn-primary mt-2" @onclick="() => driverReportPopup = !driverReportPopup">Generate Report</button>
+    <button class="DD-EditName-Button"@onclick="() => editNamePopup = !editNamePopup"> Edit Name</button>
+	<button class="DD-Generate-Report-Button" @onclick="() => driverReportPopup = !driverReportPopup">Generate Report</button>
+    <DeleteDriver driverID="@driverID" />
 </div>
 
 <!--Edit Name Popup-->
 @if (editNamePopup)
 {
-	<UpdateDriverName driverID="@driverID" driverName="@driverName" onEditComplete="HandleEditComplete" />
+    <div class="DD-Overlay" @onclick="ClosePopup">
+        <div class="DD-Popup" @onclick:stopPropagation>
+            <UpdateDriverName driverID="@driverID" driverName="@driverName" onEditComplete="HandleEditComplete" />
+            <button class="DD-Popup-Close" @onclick="ClosePopup">✖</button>
+        </div>
+    </div>
 }
 
 <!--Driver Report-->
-@if(driverReportPopup){
-	<div class="DD-Report-Container">
-		<h2 class="DD-Report-Title">@driverID</h2>
-		<h3 class="DD-Report-Subheading">Weekly Report</h3>
-
-		<div class="DD-Report-Info-Container">
-			<div class="DD-Report-Info-Driver">
-				<p>Driver Name: @driverName</p>
-				<GetDriversLicense driverID="@driverID"/>
-				<OwnedTrucks driverID="@driverID"/>
-				<DrivenTrucks driverID="@driverID"/>
-			</div>
-			<div class="DD-Report-Info-Travel">
-				<RecentTrips driverID="@driverID"/>
-				<HoursDriven driverID="@driverID"/>
-			</div>
-		</div>
-	</div>
+@if (driverReportPopup)
+{
+    <div class="DD-Overlay" @onclick="ClosePopup">
+        <div class="DD-Popup" @onclick:stopPropagation>
+            <div class="DD-Report-Container">
+                <h2 class="DD-Report-Title">@driverID</h2>
+                <h3 class="DD-Report-Subheading">Weekly Report</h3>
+                <div class="DD-Report-Info-Container">
+                    <div class="DD-Report-Info-Driver">
+                        <p>Driver Name: @driverName</p>
+                        <GetDriversLicense driverID="@driverID" />
+                        <OwnedTrucks driverID="@driverID" />
+                        <DrivenTrucks driverID="@driverID" />
+                    </div>
+                    <div class="DD-Report-Info-Travel">
+                        <RecentTrips driverID="@driverID" />
+                        <HoursDriven driverID="@driverID" />
+                    </div>
+                </div>
+            </div>
+            <button class="DD-Popup-Close" @onclick="ClosePopup">✖</button>
+        </div>
+    </div>
 }
-
 
 @code {
+    private string driverName;
+    private string driverID;
 
-	private string driverName;
-	private string newName;
-	private string driverID;
+    private bool editNamePopup = false;
+    private bool driverReportPopup = false;
 
-	private bool editNamePopup = false;
-	private bool driverReportPopup = false;
+    // Initialize dashboard
+    protected override async Task OnInitializedAsync()
+    {
+        var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
+        var queryParameters = System.Web.HttpUtility.ParseQueryString(uri.Query);
+        driverID = queryParameters["driverID"];
 
-	//initialize dashboard
-	protected override async Task OnInitializedAsync()
-	{
-		//parse the uri
-		var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
-		var queryParameters = System.Web.HttpUtility.ParseQueryString(uri.Query);
+        // Query for driver name
+        string query = "SELECT drivername FROM driver WHERE driverid = @driverID";
+        DataTable result = await DatabaseService.ExecuteQueryAsync(query, new MySqlParameter("@driverID", driverID));
+        driverName = result.Rows[0]["drivername"].ToString();
+    }
 
-		// Extract the driverID from the query parameters
-		driverID = queryParameters["driverID"];
+    private void BackToDriverLogin()
+    {
+        Navigation.NavigateTo("/driver-login");
+    }
 
-		//query for driver name
-		string query = "SELECT drivername FROM driver WHERE driverid = @driverID";
-		DataTable result = await DatabaseService.ExecuteQueryAsync(query, new MySqlParameter("@driverID", driverID));
+    private async Task HandleEditComplete(bool completed)
+    {
+        if (completed)
+        {
+            await OnInitializedAsync();
+            editNamePopup = false;
+        }
+    }
 
-		//check if valid driver ID
-		driverName = result.Rows[0]["drivername"].ToString(); //probably this
-	}
-	private void BackToDriverLogin()
-	{
-		Navigation.NavigateTo("/driver-login");
-	} 
-
-	private async Task HandleEditComplete(bool completed)
-	{
-		if (completed)
-		{
-			await OnInitializedAsync();
-
-			editNamePopup = false;
-		}
-	}
-
+    private void ClosePopup()
+    {
+        editNamePopup = false;
+        driverReportPopup = false;
+    }
 }
+

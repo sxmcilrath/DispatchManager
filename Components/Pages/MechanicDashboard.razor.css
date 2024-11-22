@@ -1,0 +1,141 @@
+﻿/* Global page styling */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: #f9f9f9;
+}
+
+/* Header section */
+.MD-Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #007bff;
+    color: white;
+    border-bottom: 2px solid #0056b3;
+    border-radius: 10px;
+}
+
+.MD-Title {
+    font-size: 1.75rem;
+    margin: 0;
+}
+
+.MD-Header-Buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.MD-Hire-Button, .MD-Generate-Report-Button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.MD-Hire-Button {
+    background-color: #28a745;
+}
+
+    .MD-Hire-Button:hover {
+        background-color: #218838;
+        transform: scale(1.05);
+    }
+
+.MD-Generate-Report-Button {
+    background-color: #17a2b8;
+}
+
+    .MD-Generate-Report-Button:hover {
+        background-color: #138496;
+        transform: scale(1.05);
+    }
+
+/* Mechanic list container */
+.MD-Mechanic-List-Container {
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+/* Mechanic card styling */
+.MD-Mechanic-Card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .MD-Mechanic-Card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+.MD-Mechanic-Info {
+    margin-bottom: 1rem;
+}
+
+    .MD-Mechanic-Info p {
+        margin: 0.5rem 0;
+    }
+
+.MD-Mechanic-Actions {
+    text-align: center;
+}
+
+/* Popup overlay */
+.MD-Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* Popup content */
+.MD-Popup {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    text-align: center;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .MD-Header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .MD-Mechanic-List-Container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .MD-Mechanic-Card {
+        width: 90%;
+    }
+}

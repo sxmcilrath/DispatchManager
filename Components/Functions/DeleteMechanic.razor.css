@@ -1,0 +1,16 @@
+﻿.DM-Delete-Button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    background-color: lightcoral;
+    width: 100%;
+}
+
+.DM-Delete-Button:hover {
+    background-color: #d32f2f;
+    transform: scale(1.05);
+}

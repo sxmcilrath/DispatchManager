@@ -1,11 +1,12 @@
 ﻿@namespace DispatchManager.Component
+<div class="HM-Container">
+    <input form="text" id="mechId" @bind="mechid" class="form-control" placeholder="Enter Mechanic ID" />
+    <input form="text" id="mechfname" @bind="mechfname" class="form-control" placeholder="Enter Mechanic First Name" />
+    <input form="text" id="mechId" @bind="mechlname" class="form-control" placeholder="Enter Mechanic Last Name" />
+    <input type="number" id="mechId" @bind="experience" class="form-control" placeholder="Enter Mechanic's years of experience" />
 
-<input form="text" id="mechId" @bind="mechid" class="form-control" placeholder="Enter Mechanic ID" />
-<input form="text" id="mechfname" @bind="mechfname" class="form-control" placeholder="Enter Mechanic First Name" />
-<input form="text" id="mechId" @bind="mechlname" class="form-control" placeholder="Enter Mechanic Last Name" />
-<input type="number" id="mechId" @bind="experience" class="form-control" placeholder="Enter Mechanic's years of experience" />
-
-<button @onclick="Hire">Hire</button>
+    <button class="HM-Hire-Button" @onclick="Hire">Hire</button>
+</div>
 @code {
 	private string mechid;
 	private string mechfname;
