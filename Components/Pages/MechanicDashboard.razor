@@ -44,6 +44,7 @@
                 }
             </div>
             <div class="MD-Mechanic-Actions">
+                <AssignMechanic mechID="@row["mechid"].ToString()"/>
                 <DeleteMechanic mechid="@row["mechid"].ToString()" OnDeleteComplete="OnHireComplete" />
             </div>
         </div>

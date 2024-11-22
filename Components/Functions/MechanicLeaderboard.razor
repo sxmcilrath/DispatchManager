@@ -19,6 +19,7 @@
             FROM servicing s
             JOIN mechanic m ON  m.mechid  = s.mechid
             GROUP BY s.mechid
+            ORDER BY repairs DESC
             ";
         mechanics = DatabaseService.ExecuteQuery(query);
     }

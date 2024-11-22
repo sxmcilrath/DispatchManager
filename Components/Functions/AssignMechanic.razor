@@ -1,0 +1,75 @@
+﻿@namespace DispatchManager.Components
+@rendermode InteractiveServer
+
+<p>@selectedServicing</p>
+@if (!displayAssignments)
+{
+    <button class="AM-Assign-Button" @onclick="StartAssignment">Assign</button>
+}
+
+@if (displayAssignments)
+{
+    <div>
+        <label for="servicingDropdown">Select Servicing:</label>
+        <select id="servicingDropdown" @bind="selectedServicing" class="form-control">
+            @foreach (DataRow row in servicings.Rows)
+            {
+                <option value="@row["maintenanceid"]">
+                    @row["maintenanceid"] - Region: @row["regionid"]
+                </option>
+            }
+        </select>
+    </div>
+    <button class="confirm-button" @onclick="ConfirmAssignment">Confirm</button>
+}
+
+
+
+
+@code {
+    [Parameter]
+    public string mechID { get; set; }
+
+    private DataTable servicings = new DataTable();
+    private string selectedServicing = "";
+    private bool displayAssignments = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        string query = @"SELECT * FROM servicing WHERE mechid <> @mechID";
+
+        servicings = await DatabaseService.ExecuteQueryAsync(query, new MySqlParameter("@mechID", mechID));
+    }
+
+    private void StartAssignment()
+    {
+        displayAssignments = true;
+    }
+
+    private async Task ConfirmAssignment()
+    {
+        if (!string.IsNullOrEmpty(selectedServicing))
+        {
+            string query = @"UPDATE servicing
+                             SET mechid = @mechID
+                             WHERE maintenanceid = @maintenanceID";
+
+            var parameters = new MySqlParameter[]
+            {
+                new MySqlParameter("@mechID", mechID),
+                new MySqlParameter("@maintenanceID", selectedServicing)
+            };
+
+            await DatabaseService.ExecuteNonQueryAsync(query, parameters);
+
+            // Refresh the dropdown or show a success message
+            await OnInitializedAsync();
+        }
+        else
+        {
+            // Handle the case where no selection is made
+            Console.WriteLine("No servicing selected.");
+        }
+        displayAssignments = false;
+    }
+}
