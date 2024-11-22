@@ -1,5 +1,15 @@
 ﻿@page "/mechanic-dashboard"
+@rendermode InteractiveServer
+
 <h3>Mechanic Dashboard</h3>
+
+<!--Hire Mechanic-->
+<button @onclick="() => hireMechPopup = !hireMechPopup">Hire Mechanic</button>
+@if (hireMechPopup)
+{
+	<p>rets true</p>
+	<HireMechanic/>
+}
 
 <!--Mechanic List-->
 <div class="MD-Mechanic-List-Container">
@@ -20,7 +30,7 @@
 </div>
 
 @code {
-
+	private bool hireMechPopup = false;
 	private DataTable mechanics;
 	protected override async Task OnInitializedAsync()
 	{

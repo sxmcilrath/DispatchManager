@@ -1,17 +1,32 @@
-﻿@namespace DispatchManager.Compon
+﻿@namespace DispatchManager.Component
 
 <input form="text" id="mechId" @bind="mechid" class="form-control" placeholder="Enter Mechanic ID" />
-<input form="text" id="mechId" @bind="mechid" class="form-control" placeholder="Enter Mechanic First Name" />
+<input form="text" id="mechfname" @bind="mechfname" class="form-control" placeholder="Enter Mechanic First Name" />
+<input form="text" id="mechId" @bind="mechlname" class="form-control" placeholder="Enter Mechanic Last Name" />
+<input type="number" id="mechId" @bind="experience" class="form-control" placeholder="Enter Mechanic's years of experience" />
+
+<button @onclick="Hire">Hire</button>
 @code {
-	[Parameter]
-	public string mechid { get; set; }
-	[Parameter]
-	public string mechfname { get; set; }
-	[Parameter]
-	public string mechlname { get; set; }
-	[Parameter]
-	public int yearsofexperience { get; set; }
+	private string mechid;
+	private string mechfname;
+	private string mechlname;
+	private int experience;
 
+	private async Task Hire()
+	{
+        string query = "INSERT INTO mechanic VALUES (@mechid, @mechfname, @mechlname, @experience)";
 
+        // Parameters for the query
+        var parameters = new MySqlParameter[]
+        {
+            new MySqlParameter("@mechid", mechid),
+            new MySqlParameter("@mechfname", mechfname),
+            new MySqlParameter("@mechlname", mechlname),
+            new MySqlParameter("@experience", experience)
+        };
+
+        // Execute the query
+        await DatabaseService.ExecuteNonQueryAsync(query, parameters);
+	}
 
 }
