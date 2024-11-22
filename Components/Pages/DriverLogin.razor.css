@@ -1,0 +1,108 @@
+﻿/* Main container for the Driver Login page */
+.DL-Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Full viewport height */
+    text-align: center;
+    font-family: Arial, sans-serif;
+    
+    padding: 1rem;
+    box-sizing: border-box;
+  
+}
+
+/* Title styling */
+.DL-Title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+/* Input field container */
+.DL-Input-Container {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 1rem;
+}
+
+/* Styling for the input field */
+.DL-Input {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.25rem;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .DL-Input:focus {
+        border-color: #0056b3;
+        box-shadow: 0 0 8px rgba(0, 91, 187, 0.5);
+        outline: none;
+    }
+
+/* Button container */
+.DL-Button-Container {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Button styling */
+.DL-Button {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+    .DL-Button:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+/* Error message styling */
+.DL-Error {
+    margin-top: 1rem;
+    color: red;
+    font-size: 1rem;
+    font-weight: bold;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Fade-in animation for error messages */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .DL-Title {
+        font-size: 2rem;
+    }
+
+    .DL-Input {
+        font-size: 1rem;
+        padding: 0.5rem;
+    }
+
+    .DL-Button {
+        font-size: 1rem;
+        padding: 0.5rem;
+    }
+}

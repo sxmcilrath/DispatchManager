@@ -1,0 +1,74 @@
+﻿html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent scrolling */
+}
+
+/* Center the entire page content */
+.Home-Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Full viewport height */
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Style for the title */
+.Home-Title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.8rem;
+}
+
+/* Style for the subtitle */
+.Home-Subtitle {
+    font-size: 1.5rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+/* Center the buttons and style them */
+.Home-Button-Container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Spacing between buttons */
+    width: 100%; /* Full width for better button placement */
+    max-width: 400px; /* Restrict button container width */
+}
+
+/* General button styling */
+button {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Driver button specific style */
+.driver-button {
+    background-color: #007bff;
+    color: white;
+}
+
+    .driver-button:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+/* Mechanic button specific style */
+.mechanic-button {
+    background-color: #28a745;
+    color: white;
+}
+
+    .mechanic-button:hover {
+        background-color: #1c7c33;
+        transform: scale(1.05);
+    }

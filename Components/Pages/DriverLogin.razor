@@ -8,18 +8,29 @@
 @inject NavigationManager Navigation
 @inject IJSRuntime JS
 
+
 <PageTitle>Driver Login</PageTitle>
 
-<h3>Driver Login</h3>
+<div class="DL-Container">
+    <h3 class="DL-Title">Driver Login</h3>
 
-<div>
-    <input form="text" id="driverId" @bind="driverID" class="form-control" placeholder="Enter Driver ID" />
-</div>
-<button @onclick="LoginDriver" class="btn btn-primary mt-2">Login</button>
+    <div class="DL-Input-Container">
+        <input form="text"
+               id="driverId"
+               @bind="driverID"
+               class="DL-Input form-control"
+               placeholder="Enter Driver ID" />
+    </div>
 
-@if(driverError != null){
-    <p>@driverError</p>
+    <div class="DL-Button-Container">
+        <button @onclick="LoginDriver" class="DL-Button btn btn-primary mt-2">Login</button>
+    </div>
+
+    @if (driverError != null)
+    {
+        <p class="DL-Error">@driverError</p>
     }
+</div>
 @code {
     // Driver login logic
     string driverName;

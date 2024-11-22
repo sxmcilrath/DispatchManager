@@ -1,0 +1,80 @@
+﻿@namespace DispatchManager.Components
+<h3>Repairs</h3>
+
+@if (repairRecords != null && repairRecords.Rows.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Maintenance ID</th>
+                <th>Truck Name</th>
+                <th>Mechanic Name</th>
+                <th>Region</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow row in repairRecords.Rows)
+            {
+                <tr>
+                    <td>@row["maintenanceid"]</td>
+                    <td>@row["truckmodel"]</td>
+                    <td>@row["mechfname"] @row["mechlname"]</td>
+                    <td>@row["regionname"]</td>
+                    <td>@row["maintenancedate"]</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (isLoading)
+{
+    <p>Loading repairs...</p>
+}
+else
+{
+    <p>No repair records found.</p>
+}
+
+@code {
+    private DataTable repairRecords;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            string query = @"
+               SELECT
+                    s.maintenanceid,
+                    t.truckmodel,
+                    mc.mechfname,
+                    mc.mechlname,
+                    r.regionname, 
+                    m.maintenancedate
+                FROM
+                    servicing s
+                JOIN
+                    maintenance m ON m.maintenanceid = s.maintenanceid
+                JOIN
+                    truck t ON t.truckid = m.truckid
+                JOIN
+                    mechanic mc ON mc.mechid = s.mechid
+                JOIN
+                    region r ON r.regionid = s.regionid
+                WHERE
+                    m.maintenancedate >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)";
+
+            // Fetch data asynchronously
+            repairRecords = await DatabaseService.ExecuteQueryAsync(query);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching repair records: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+}

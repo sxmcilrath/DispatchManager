@@ -11,6 +11,20 @@
 	<HireMechanic/>
 }
 
+<!--Generate Report-->
+<button @onclick="() => reportPopup = !reportPopup">Generate Report</button>
+@if (reportPopup)
+{
+	<div class="MD-Report-Container">
+		<Repairs></Repairs>
+	</div>
+}
+<!--New Repair -->
+<button @onclick="() => newRepairPopup = !newRepairPopup"></button>
+@if (newRepairPopup)
+{
+	
+}
 <!--Mechanic List-->
 <div class="MD-Mechanic-List-Container">
 	@foreach(DataRow row in mechanics.Rows)
@@ -31,6 +45,9 @@
 
 @code {
 	private bool hireMechPopup = false;
+	private bool reportPopup = false;
+	private bool newRepairPopup = false;
+
 	private DataTable mechanics;
 	protected override async Task OnInitializedAsync()
 	{

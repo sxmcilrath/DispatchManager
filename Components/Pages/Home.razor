@@ -1,4 +1,5 @@
 ﻿@page "/"
+@page "/home"
 @rendermode InteractiveServer
 @using DispatchManager.Services
 @using System.Data
@@ -6,66 +7,27 @@
 @inject NavigationManager Navigation
 @inject IJSRuntime JS
 
-
 <PageTitle>ROLE SELECT</PageTitle>
 
-<h1>ROLE SELECT</h1>
-
-Please Select Your Role!
-
-    <button class="driver-button" @onclick="NavigateToDriverLogin">Driver</button>
-
-    <button class="mechanic-button" @onclick="NavigateToMechanicDashboard">Mechanic</button>
-
-
-
+<div class="Home-Container">
+    <h1 class="Home-Title">ROLE SELECT</h1>
+    <p class="Home-Dubtitle">Please Select Your Role!</p>
+    <div class="Home-Button-Container">
+        <button class="driver-button" @onclick="NavigateToDriverLogin">Driver</button>
+        <button class="mechanic-button" @onclick="NavigateToMechanicDashboard">Mechanic</button>
+    </div>
+</div>
 
 @code {
-    private DataTable drivers;
-    private int currentCount = 0; 
+  
 
-
-    protected override async Task OnInitializedAsync()
-    {
-        string query = "SELECT * FROM driver";
-        drivers = DatabaseService.ExecuteQuery(query);
-    }
-
-    private void inc()
-    {
-        currentCount++;
-    }
     private void NavigateToDriverLogin()
     {
-        if (Navigation == null)
-        {
-            Console.WriteLine("NavigationManager is null.");
-        }
-        else
-        {
-            Console.WriteLine("Navigating to /driver-login");
-            Navigation.NavigateTo("/driver-login");
-        }
+        Navigation?.NavigateTo("/driver-login");
     }
 
     private void NavigateToMechanicDashboard()
     {
-        Navigation.NavigateTo("/mechanic-dashboard");
+        Navigation?.NavigateTo("/mechanic-dashboard");
     }
-        /*
-     * @if (drivers != null)
-        {
-        <ul>
-        @foreach (DataRow driver in drivers.Rows)
-            {
-            <li>@driver["drivername"]</li>
-            }
-        </ul>
-    }
-    else
-    {
-    <p>Loading drivers...</p>
-    }
-
-    */
 }
