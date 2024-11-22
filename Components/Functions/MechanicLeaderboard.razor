@@ -1,0 +1,25 @@
+﻿@namespace DispatchManager.Components
+<h3 class="ML-Title">Repair Leaderboard</h3>
+<div class="ML-Container">
+    @foreach (DataRow row in mechanics.Rows)
+    {
+        <div class="ML-Row">
+            <p class="ML-Name"><strong>@row["mechfname"] @row["mechlname"]:</strong></p>
+            <p class="ML-Repairs">@row["repairs"]</p>
+        </div>
+    }
+</div>
+
+@code {
+    private DataTable mechanics;
+    protected override async Task OnInitializedAsync()
+    {
+        string query = @"
+            SELECT mechfname,mechlname, COUNT(*) AS repairs
+            FROM servicing s
+            JOIN mechanic m ON  m.mechid  = s.mechid
+            GROUP BY s.mechid
+            ";
+        mechanics = DatabaseService.ExecuteQuery(query);
+    }
+}

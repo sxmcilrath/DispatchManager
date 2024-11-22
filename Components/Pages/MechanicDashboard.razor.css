@@ -28,7 +28,7 @@ body {
     gap: 1rem;
 }
 
-.MD-Hire-Button, .MD-Generate-Report-Button {
+.MD-Hire-Button, .MD-Generate-Report-Button, .MD-Back-Button {
     padding: 0.5rem 1rem;
     font-size: 1rem;
     border: none;
@@ -53,6 +53,15 @@ body {
 
     .MD-Generate-Report-Button:hover {
         background-color: #138496;
+        transform: scale(1.05);
+    }
+
+.MD-Back-Button {
+    background-color: lightcoral;
+}
+
+    .MD-Back-Button:hover {
+        background-color: darkred;
         transform: scale(1.05);
     }
 

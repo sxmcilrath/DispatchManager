@@ -1,8 +1,7 @@
 ﻿@namespace DispatchManager.Components
-<div>
+
 	<input form="text" id="driverId" @bind="newName" class="form-control" placeholder="@driverName" />
-	<button @onclick="CompleteEdit"> Confirm </button>
-</div>
+	<button @onclick="CompleteEdit" class="confirm-button">Confirm</button>
 
 @code {
 	[Parameter]

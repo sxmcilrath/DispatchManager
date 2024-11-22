@@ -1,0 +1,49 @@
+﻿.ML-Title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.ML-Container {
+    display: flex;
+    flex-direction: column; /* Align leaderboard entries vertically */
+    align-items: stretch; /* Stretch rows to container width */
+    max-height: 400px; /* Set maximum height for scroll */
+    overflow-y: auto; /* Enable vertical scrolling if overflow */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ML-Row {
+    display: flex;
+    justify-content: space-between; /* Align name and repairs count horizontally */
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee; /* Row divider */
+    transition: background-color 0.2s ease;
+}
+
+    .ML-Row:last-child {
+        border-bottom: none; /* Remove border for the last row */
+    }
+
+    .ML-Row:hover {
+        background-color: #f0f0f0; /* Highlight row on hover */
+    }
+
+.ML-Name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+}
+
+.ML-Repairs {
+    font-size: 14px;
+    color: #777;
+    font-style: italic;
+}

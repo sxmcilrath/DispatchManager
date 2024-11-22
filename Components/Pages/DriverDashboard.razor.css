@@ -152,6 +152,7 @@ body {
     position: relative;
     overflow: auto; /* Handle overflow for larger content */
     max-height: 90%;
+
 }
 
 /* Header Section */
