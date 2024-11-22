@@ -1,10 +1,18 @@
 ﻿@namespace DispatchManager.Components
+@rendermode InteractiveServer
 
-<h3>DeleteMechanic</h3>
+<p>here is passed: @mechid</p>
+<button @onclick="Delete">Delete</button>
 
 @code {
 	[Parameter]
-	public string mechid = { get; set }
+	public string mechid { get; set;}
 
-	publi
+	private async Task Delete(){
+
+		string query = "DELETE FROM mechanic WHERE mechid = @mechid";
+
+		await DatabaseService.ExecuteNonQueryAsync(query, new MySqlParameter("@mechid", mechid));
+		mechid = "changed";
+	}
 }
