@@ -33,25 +33,39 @@
 {
     <div class="DD-Overlay" @onclick="ClosePopup">
         <div class="DD-Popup" @onclick:stopPropagation>
-            <div class="DD-Report-Container">
+            <!-- Title Section -->
+            <div class="DD-Report-Header">
                 <h2 class="DD-Report-Title">@driverID</h2>
                 <h3 class="DD-Report-Subheading">Weekly Report</h3>
-                <div class="DD-Report-Info-Container">
-                    <div class="DD-Report-Info-Driver">
-                        <p>Driver Name: @driverName</p>
-                        <GetDriversLicense driverID="@driverID" />
-                        <OwnedTrucks driverID="@driverID" />
-                        <DrivenTrucks driverID="@driverID" />
-                    </div>
-                    <div class="DD-Report-Info-Travel">
-                        <RecentTrips driverID="@driverID" />
-                        <HoursDriven driverID="@driverID" />
-                    </div>
+            </div>
+
+            <!-- Content Section -->
+            <div class="DD-Report-Content">
+                <!-- Driver Information -->
+                <div class="DD-Section">
+                    <h4 class="DD-Section-Title">Driver Information</h4>
+                    <p><strong>Driver Name:</strong> @driverName</p>
+                    <GetDriversLicense driverID="@driverID" />
+                    <p><strong>Owned Trucks:</strong></p>
+                    <OwnedTrucks driverID="@driverID" />
+                    <p><strong>Driven Trucks:</strong></p>
+                    <DrivenTrucks driverID="@driverID" />
+                </div>
+
+                <!-- Travel Information -->
+                <div class="DD-Section">
+                    <h4 class="DD-Section-Title">Travel Information</h4>
+                    <RecentTrips driverID="@driverID" />
+                    <p><strong>Hours Driven:</strong></p>
+                    <HoursDriven driverID="@driverID" />
                 </div>
             </div>
+
+            <!-- Close Button -->
             <button class="DD-Popup-Close" @onclick="ClosePopup">✖</button>
         </div>
     </div>
+
 }
 
 @code {

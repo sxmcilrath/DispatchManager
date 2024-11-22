@@ -8,12 +8,13 @@ body {
     box-sizing: border-box;
 }
 
-.DD-Title{
-    align-items:center;
+.DD-Title {
+    align-items: center;
     justify-content: center;
-    display:flex;
+    display: flex;
     font-weight: 1000;
 }
+
 /* Header styling */
 .DD-Header {
     display: flex;
@@ -83,7 +84,7 @@ body {
 .DD-Functions {
     display: flex;
     justify-content: center;
-    align-items:center;
+    align-items: center;
     margin: 2rem 0;
     height: 300px;
     background-color: lightblue;
@@ -91,32 +92,33 @@ body {
     gap: 20px;
 }
 
-.DD-Generate-Report-Button {
+.DD-Generate-Report-Button, .DD-EditName-Button {
     padding: 0.75rem 1.5rem;
     font-size: 1.25rem;
     border: none;
     border-radius: 8px;
-    background-color: #28a745;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    height: 50%;
+    height: 85%;
+    width: 30%;
+    display: flex;
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
+    text-align: center;
+}
+
+.DD-Generate-Report-Button {
+    background-color: #28a745;
 }
 
     .DD-Generate-Report-Button:hover {
         background-color: #218838;
         transform: scale(1.05);
     }
+
 .DD-EditName-Button {
-    padding: 0.75rem 1.5rem;
-    font-size: 1.25rem;
-    border: none;
-    border-radius: 8px;
     background-color: orange;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    height: 50%;
 }
 
     .DD-EditName-Button:hover {
@@ -124,74 +126,80 @@ body {
         transform: scale(1.05);
     }
 
-
-/* Report container */
-.DD-Report-Container {
-    background-color: white;
-    padding: 2rem;
-    margin: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    width: 100%;
-    margin: 2rem auto;
-}
-
-.DD-Report-Title {
-    font-size: 1.5rem;
-    color: #333;
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.DD-Report-Subheading {
-    font-size: 1.25rem;
-    color: #555;
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.DD-Report-Info-Container {
-    display: flex;
-    justify-content: space-around;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-.DD-Report-Info-Driver, .DD-Report-Info-Travel {
-    flex: 1;
-    min-width: 300px;
-}
-
-    .DD-Report-Info-Driver p, .DD-Report-Info-Travel p {
-        font-size: 1rem;
-        margin: 0.5rem 0;
-    }
-
-/* Popup overlay and container */
+/* Overlay background for the popup */
 .DD-Overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 999;
 }
 
+/* Popup container */
 .DD-Popup {
     background: white;
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    max-width: 500px;
-    width: 100%;
+    max-width: 600px;
+    width: 90%;
     z-index: 1000;
     position: relative;
+    overflow: auto; /* Handle overflow for larger content */
+    max-height: 90%;
+}
+
+/* Header Section */
+.DD-Report-Header {
     text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.DD-Report-Title {
+    font-size: 1.75rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.DD-Report-Subheading {
+    font-size: 1.25rem;
+    color: #555;
+}
+
+/* Content Section */
+.DD-Report-Content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem; /* Spacing between sections */
+    justify-content: space-between;
+}
+
+/* Sections within the content */
+.DD-Section {
+    flex: 1 1 100%; /* Each section takes full width on smaller screens */
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.DD-Section-Title {
+    font-size: 1.25rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+/* Text formatting for paragraphs */
+.DD-Section p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #333;
 }
 
 /* Close button */
@@ -204,40 +212,21 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
     color: #333;
-    transition: color 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out, transform 0.2s ease;
 }
 
     .DD-Popup-Close:hover {
         color: red;
+        transform: scale(1.1);
     }
 
-/* Button styling for popup */
-.DD-Popup button {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-    .DD-Popup button:hover {
-        background-color: #0056b3;
-    }
-
-/* Responsive design */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .DD-Welcome h2 {
-        font-size: 1.5rem;
+    .DD-Report-Content {
+        flex-direction: column; /* Stack sections vertically on smaller screens */
     }
 
-    .DD-Generate-Report-Button {
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
-    }
-
-    .DD-Report-Info-Container {
-        flex-direction: column;
+    .DD-Section {
+        flex: 1 1 100%; /* Full width for each section */
     }
 }

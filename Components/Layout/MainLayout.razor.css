@@ -9,7 +9,25 @@ main {
 }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background-image: linear-gradient(180deg, #1b6b2e, #3c567c);
+    background-size: 200% 200%; /* Increase the size of the gradient */
+    animation: gradientAnimation 6s ease infinite; /* Animate the gradient */
+    color: white;
+}
+
+/* Keyframes for gradient animation */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
 }
 
 .top-row {
