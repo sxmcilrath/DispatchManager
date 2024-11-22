@@ -7,11 +7,16 @@
 	[Parameter]
 	public string mechid { get; set;}
 
+	[Parameter]
+	public EventCallback OnDeleteComplete { get; set; }
+
 	private async Task Delete(){
 
 		string query = "DELETE FROM mechanic WHERE mechid = @mechid";
 
 		await DatabaseService.ExecuteNonQueryAsync(query, new MySqlParameter("@mechid", mechid));
 		mechid = "changed";
+
+		await OnDeleteComplete.InvokeAsync();
 	}
 }

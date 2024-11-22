@@ -13,6 +13,9 @@
 	private string mechlname;
 	private int experience;
 
+    [Parameter]
+    public EventCallback OnHireComplete { get; set; }
+
 	private async Task Hire()
 	{
         string query = "INSERT INTO mechanic VALUES (@mechid, @mechfname, @mechlname, @experience)";
@@ -28,6 +31,8 @@
 
         // Execute the query
         await DatabaseService.ExecuteNonQueryAsync(query, parameters);
+
+        await OnHireComplete.InvokeAsync();
 	}
 
 }

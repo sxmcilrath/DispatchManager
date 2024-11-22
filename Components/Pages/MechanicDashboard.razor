@@ -15,7 +15,7 @@
     <div class="MD-Overlay" @onclick="() => hireMechPopup = false">
         <div class="MD-Popup" @onclick:stopPropagation>
             <p>New Hire Info</p>
-            <HireMechanic />
+            <HireMechanic OnHireComplete="OnHireComplete" />
         </div>
     </div>
 }
@@ -44,7 +44,7 @@
                 }
             </div>
             <div class="MD-Mechanic-Actions">
-                <DeleteMechanic mechid="@row["mechid"].ToString()" />
+                <DeleteMechanic mechid="@row["mechid"].ToString()" OnDeleteComplete="OnHireComplete" />
             </div>
         </div>
     }
@@ -67,4 +67,12 @@
     {
         Navigation.NavigateTo("/");
     }
+
+    private async Task OnHireComplete()
+    {
+        hireMechPopup = false; // Close overlay
+        await OnInitializedAsync(); // Refresh the mechanic list
+    }
+
+
 }
